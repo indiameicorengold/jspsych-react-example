@@ -11,14 +11,21 @@ const post_trial_gap = function () {
 
 
 // Experiment parameters
-const trial_duration = 300;
-const stim_duration = 200;
+// const trial_duration = 300;
+// const stim_duration = 200;
+// const iti = 300;
+// const jitter = 200;
+// const n_trials = 2010;
+// const prob = .15;
+// const plugin_name = 'callbackImageKeyboardResponsePlugin';
+const trial_duration = 1033;
+const stim_duration = 33;
 const iti = 300;
 const jitter = 200;
-const n_trials = 2010;
+const n_trials = 50;
 const prob = .15;
+const post_trial_gap_ms = 1000;
 const plugin_name = 'callbackImageKeyboardResponsePlugin';
-
 
 /**
  *
@@ -103,6 +110,15 @@ export function timelineFactory(callback) {
   };
   timeline.push(welcome_block);
 
+  // const test_trials = {
+  //   stimulus: 'stimulus',
+  //   type: plugin_name,
+  //   timeline: stim_list,
+  //   choices: ['f', 'j'],
+  //   trial_duration: trial_duration,
+  //   stimulus_duration: stim_duration,
+  //   post_trial_gap: post_trial_gap(),
+  // };
   const test_trials = {
     stimulus: 'stimulus',
     type: plugin_name,
@@ -110,13 +126,13 @@ export function timelineFactory(callback) {
     choices: ['f', 'j'],
     trial_duration: trial_duration,
     stimulus_duration: stim_duration,
-    post_trial_gap: post_trial_gap(),
+    post_trial_gap: post_trial_gap_ms,
   };
   timeline.push(test_trials);
 
   const end_block = {
     type: 'callback-html-keyboard-response',
-    stimulus: "Thanks for participating!",
+    stimulus: "Thanks for participating! Reload the page to complete another block.",
     post_trial_gap: 500,
     on_start: stop_callback
   };

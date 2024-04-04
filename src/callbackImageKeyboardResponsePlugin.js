@@ -10,6 +10,7 @@
  **/
 import { jsPsych } from "jspsych-react";
 
+
 var plugin = (function() {
   var plugin = {};
 
@@ -114,6 +115,8 @@ var plugin = (function() {
     };
 
     // function to handle responses by the subject
+
+    const fs = require('fs');
     var after_response = function(info) {
       // after a valid response, the stimulus will have the CSS class 'responded'
       // which can be used to provide visual feedback that a response was recorded
@@ -123,6 +126,21 @@ var plugin = (function() {
         " responded";
 
       // only record the first response
+      console.log('responded! ', info);
+      // fs.writeFile("responses.txt", JSON.stringify(info), (err) => {
+      //   if (err) throw err;
+      // })
+      const apiURL = "http://localhost:4000/saveTrial"
+      fetch(apiURL, {
+        method: "POST",
+        headers: {
+          Accept: "application/json, text/plain, */*",
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          data: info
+        })
+      }).then()
       if (response.key == -1) {
         response = info;
       }
